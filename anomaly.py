@@ -63,7 +63,8 @@ class AnomalyDetector:
         ])))
 
         # Convolutional neural net
-        self.cnn = torchvision.models.resnet18(pretrained=True)
+        self.cnn = torchvision.models.resnet18(
+            weights=torchvision.models.ResNet18_Weights.IMAGENET1K_V1)
         self.cnn_input_height = 320
         self.cnn_input_width = 320
         self.device = torch.device(
