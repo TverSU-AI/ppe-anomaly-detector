@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-   Copyright 2023 IQT Labs LLC
+   Copyright 2023-2024 IQT Labs LLC
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -49,17 +49,22 @@ class AnomalyDetector:
 
         # Tile (i.e., patch) size and stride
         tile_default = 32
-        stride_default = 8
+        stride_default_fraction = 0.25
         non = lambda x: x is not None
-        self.tile_height = next(filter(non, [tile_height, tile, tile_default]))
-        self.tile_width = next(filter(non, [tile_width, tile, tile_default]))
-        self.stride_height = next(filter(non, [
-            stride_height, stride, stride_default]))
-        self.stride_width = next(filter(non, [
-            stride_width, stride, stride_default]))
+        self.tile_height = round(next(filter(non, [
+            tile_height, tile, tile_default])))
+        self.tile_width = round(next(filter(non, [
+            tile_width, tile, tile_default])))
+        self.stride_height = round(next(filter(non, [
+            stride_height, stride, stride_default_fraction * self.tile_height
+        ])))
+        self.stride_width = round(next(filter(non, [
+            stride_width, stride, stride_default_fraction * self.tile_width
+        ])))
 
         # Convolutional neural net
-        self.cnn = torchvision.models.resnet18(pretrained=True)
+        self.cnn = torchvision.models.resnet18(
+            weights=torchvision.models.ResNet18_Weights.IMAGENET1K_V1)
         self.cnn_input_height = 320
         self.cnn_input_width = 320
         self.device = torch.device(

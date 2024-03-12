@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-image_name=anomaly_image
-container_name=anomaly_container
+image_name=anomaly
+container_name=anomaly
 
 if [ -z "$(docker images -q $image_name)" ]; then
-    nvidia-docker build -f Dockerfile -t $image_name ./
+    docker build -f Dockerfile -t $image_name ./
 fi
 
-nvidia-docker run --name $container_name \
-	      -it --shm-size=64g \
-	      $image_name
+docker run --name $container_name \
+       --runtime=nvidia -it --shm-size=64g \
+       $image_name
