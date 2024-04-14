@@ -1,0 +1,21 @@
+queries:
+  - filename: Screenshot 2024-03-05 230140_mask.jpg
+    find_least_whitest: true
+  - filename: Screenshot 2024-03-05 230432_mask.jpg
+    find_least_whitest: true
+  - filename: Screenshot 2024-03-05 230741_mask.jpg
+    find_least_whitest: true
+  - filename: Screenshot 2024-03-05 230759_mask.jpg
+    find_least_whitest: true
+  - filename: Screenshot from 2024-04-14 16-09-14_mask.png
+    find_least_whitest: false
+  - filename: Screenshot from 2024-04-14 16-11-09_mask.png
+    find_least_whitest: false
+  - filename: Screenshot from 2024-04-14 16-14-21_mask.png
+    find_least_whitest: false
+  - filename: Screenshot from 2024-04-14 16-14-28_mask.png
+    find_least_whitest: false
+  - filename: Screenshot from 2024-04-14 16-14-28_mask.png
+    find_least_whitest: false
+  - filename: Screenshot from 2024-04-14 17-32-53_mask.png
+    find_least_whitest: false

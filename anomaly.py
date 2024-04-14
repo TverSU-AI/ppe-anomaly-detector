@@ -161,14 +161,14 @@ class AnomalyDetector:
         metas = []
         for filepath in tqdm.tqdm(files, desc='Files'):
             im = Image.open(filepath).convert('RGB')
+            # print(f"opening {filepath}")
             img = transform_tile(im)
             if metadata:
                 metas.append({'path': filepath,
                               'height': im.height,
                               'width': im.width,
                               'tiles': img.size(0)})
-            for batch in tqdm.tqdm(torch.split(img, self.cnn_batchsize, dim=0),
-                                   desc='Tiles'):
+            for batch in torch.split(img, self.cnn_batchsize, dim=0):
                 batch_resized = transform_format(batch)
                 with torch.set_grad_enabled(False):
                     partial_features = self.cnn(batch_resized).detach().cpu()
